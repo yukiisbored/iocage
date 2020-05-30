@@ -428,8 +428,8 @@ class IOCFetch:
                 self.release = self.__fetch_validate_release__(releases, eol)
 
         if self.hardened:
-            self.root_dir = f"{rdir}/HardenedBSD-{self.release.upper()}-" \
-                f"{self.arch}-LATEST"
+            self.root_dir = f"{rdir}/{self.release}/{self.arch}/{self.arch}/" \
+                "BUILD-LATEST"
 
         self.__fetch_exists__()
         iocage_lib.ioc_common.logit(
