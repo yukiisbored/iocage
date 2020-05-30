@@ -302,8 +302,8 @@ class IOCFetch:
 
         if self.hardened:
             if self.server == "download.freebsd.org":
-                self.server = "http://jenkins.hardenedbsd.org"
-                rdir = "builds"
+                self.server = "https://ci-01.nyi.hardenedbsd.org/"
+                rdir = "pub/hardenedbsd"
 
         if self.root_dir is None:
             self.root_dir = f"ftp/releases/{self.arch}"
@@ -341,10 +341,8 @@ class IOCFetch:
                     rel = rel.decode()
                     rel = rel.strip("href=").strip("/").split(">")
 
-                    if "-STABLE" in rel[0]:
-                        rel = rel[0].strip('"').strip("/").strip(
-                            "HardenedBSD-").rsplit("-")
-                        rel = f"{rel[0]}-{rel[1]}"
+                    if "-stable" in rel[0]:
+                        rel = rel[0].strip('"').strip("/")
 
                         if rel not in releases:
                             releases.append(rel)
@@ -359,9 +357,8 @@ class IOCFetch:
     No RELEASEs were found at {self.server}/{self.root_dir}!
     Please ensure the server is correct and the root-dir is
     pointing to a top-level directory with the format:
-        - XX.X-RELEASE
-        - XX.X-RELEASE
-        - XX.X-RELEASE
+        - XX-stable
+        - XX-stable
     """
                         },
                         _callback=self.callback,
