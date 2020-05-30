@@ -430,6 +430,7 @@ class IOCFetch:
         if self.hardened:
             self.root_dir = f"{rdir}/{self.release}/{self.arch}/{self.arch}/" \
                 "BUILD-LATEST"
+            print(self.root_dir)
 
         self.__fetch_exists__()
         iocage_lib.ioc_common.logit(
